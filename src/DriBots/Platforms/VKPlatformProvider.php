@@ -25,7 +25,7 @@ class VKPlatformProvider implements BasePlatformProvider {
             $messageData = $messageData[0];
             if(!isset($messageData["error"])) {
                 return new Message(
-                    id: $messageData['conversation_message_id'],
+                    id: $messageData['conversation_message_id']??$messageData['message_id'],
                     fromId: $this->platform->groupId,
                     text: $text);
             }
