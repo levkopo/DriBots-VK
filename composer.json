@@ -1,0 +1,29 @@
+{
+  "name": "levkopo/dribots-vk",
+  "description": "Support library for DriBots library",
+  "type": "library",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "levkopo",
+      "email": "levkopoag@gmail.com",
+      "homepage": "https://github.com/levkopo/"
+    }
+  ],
+  "autoload": {
+    "DriBots\\": "src/DriBots"
+  },
+
+  "extra": {
+    "branch-alias": {
+      "dev-main": "1.x-dev"
+    }
+  },
+
+  "require": {
+    "php": ">=8.0",
+    "levkopo/dribots": "^1.0",
+    "ext-json": "*"
+  }
+}
