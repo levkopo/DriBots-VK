@@ -20,6 +20,7 @@ class VKPlatformProvider implements BasePlatformProvider {
             "peer_ids"=>$toId,
             "message"=>$text
         ])){
+            var_dump($messageData);
             $messageData = $messageData['peer_ids'][0];
             if(!isset($messageData["error"]))
                 return new Message(
