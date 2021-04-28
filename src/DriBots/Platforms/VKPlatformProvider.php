@@ -17,8 +17,9 @@ class VKPlatformProvider implements BasePlatformProvider {
      */
     public function sendMessage(int $toId, string $text): Message|false {
         if($messageData = $this->call("messages.send", [
-            "peer_ids"=>$toId,
-            "message"=>$text
+            "peer_ids" => $toId,
+            "message" => $text,
+            "random_id" => 0
         ])){
             var_dump($messageData);
             $messageData = $messageData['peer_ids'][0];

@@ -32,7 +32,9 @@ class VKPlatform extends BasePlatform {
         try {
             $this->data = json_decode(file_get_contents("php://input"),
                 true, 512, JSON_THROW_ON_ERROR);
-            return isset($this->data['type'], $this->data['group_id']);
+            return isset($this->data['type'], $this->data['group_id'])&&
+                (!($this->secretCode!==null)||(isset($this->data["secret"])&&
+                        $this->data["secret"]===$this->secretCode));
         }catch (JsonException){}
 
         return false;
