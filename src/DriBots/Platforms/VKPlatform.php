@@ -18,6 +18,7 @@ class VKPlatform extends BasePlatform {
         public string $accessToken,
         public int $groupId,
         public ?string $secretCode = null,
+        public ?string $confirmationCode = null,
         public string $apiVersion = "5.103",
         public string $apiUrl = "https://api.vk.com/method/",
     ) {
@@ -33,11 +34,13 @@ class VKPlatform extends BasePlatform {
      */
     public function handleEnd(): void {
         if($this->data['type']==="confirmation"){
-            if($response = $this->platformProvider->call("groups.getCallbackConfirmationCode", [
+            if($this->confirmationCode!==null){
+                echo $this->confirmationCode;
+            }else if($response = $this->platformProvider->call("groups.getCallbackConfirmationCode", [
                     "group_id"=>$this->groupId
                 ])){
                 echo $response['code'];
-            }else {
+            }else{
                 echo "Error :(";
             }
         }else {
@@ -72,7 +75,7 @@ class VKPlatform extends BasePlatform {
         );
     }
 
-    public function getPlatformProvider(): BasePlatformProvider {
+    public function getPlatformProvider(): VKPlatformProvider {
         return $this->platformProvider;
     }
 }
