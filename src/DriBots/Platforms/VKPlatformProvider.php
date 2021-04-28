@@ -22,13 +22,13 @@ class VKPlatformProvider implements BasePlatformProvider {
             "random_id" => 0
         ])){
             var_dump($messageData);
-            $messageData = $messageData['peer_ids'][0];
-            if(!isset($messageData["error"]))
+            $messageData = $messageData[0];
+            if(!isset($messageData["error"])) {
                 return new Message(
                     id: $messageData['conversation_message_id'],
                     fromId: $this->platform->groupId,
-                    text: $text
-                );
+                    text: $text);
+            }
         }
 
         return false;
