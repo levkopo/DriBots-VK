@@ -50,6 +50,7 @@ class VKPlatformProvider implements BasePlatformProvider {
         }
 
         $data = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+        var_dump($data);
         if(isset($data["error"])){
             return false;
         }
