@@ -21,7 +21,6 @@ class VKPlatformProvider implements BasePlatformProvider {
             "message" => $text,
             "random_id" => 0
         ])){
-            var_dump($messageData);
             $messageData = $messageData[0];
             if(!isset($messageData["error"])) {
                 return new Message(
@@ -52,7 +51,6 @@ class VKPlatformProvider implements BasePlatformProvider {
         }
 
         $data = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
-        var_dump($data);
         if(isset($data["error"])){
             return false;
         }
