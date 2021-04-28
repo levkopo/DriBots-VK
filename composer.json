@@ -12,7 +12,9 @@
     }
   ],
   "autoload": {
-    "DriBots\\": "src/DriBots"
+    "psr-4": {
+      "DriBots\\": "src/DriBots"
+    }
   },
 
   "extra": {
