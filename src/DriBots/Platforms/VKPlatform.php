@@ -28,6 +28,23 @@ class VKPlatform extends BasePlatform {
         return "vk";
     }
 
+    /**
+     * @throws JsonException
+     */
+    public function handleEnd(): void {
+        if($this->data['type']==="confirmation"){
+            if($response = $this->platformProvider->call("groups.getCallbackConfirmationCode", [
+                    "group_id"=>$this->groupId
+                ])){
+                echo $response['code'];
+            }else {
+                echo "Error :(";
+            }
+        }else {
+            echo "ok";
+        }
+    }
+
     public function requestIsAccept(): bool {
         try {
             $this->data = json_decode(file_get_contents("php://input"),

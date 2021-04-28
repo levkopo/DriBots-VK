@@ -57,10 +57,6 @@ class VKPlatformProvider implements BasePlatformProvider {
             return false;
         }
 
-        if(isset($data["response"])){
-            return $data["response"];
-        }
-
-        return false;
+        return $data["response"]??false;
     }
 }
