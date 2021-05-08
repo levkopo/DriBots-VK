@@ -4,6 +4,8 @@
 namespace DriBots\Platforms;
 
 
+use DriBots\Data\Attachment;
+use DriBots\Data\Attachments\PhotoAttachment;
 use DriBots\Data\Event;
 use DriBots\Data\Message;
 use JetBrains\PhpStorm\Pure;
@@ -71,8 +73,22 @@ class VKPlatform extends BasePlatform {
         return new Message(
             id: $data['conversation_message_id'],
             fromId: $data['peer_id'],
-            text: $data['text']
+            text: $data['text'],
+            attachment: count($data['attachments'])!==0?
+                $this->parseAttachment($data['attachments'][1]):null
         );
+    }
+
+    #[Pure] public function parseAttachment(array $attachment): ?Attachment{
+        if($attachment['type']==="photo"){
+            $attachment = $attachment['photo'];
+
+            return new PhotoAttachment(
+                path: $attachment['sizes'][(int) (count($attachment['sizes'])/2)]
+            );
+        }
+
+        return null;
     }
 
     public function getPlatformProvider(): VKPlatformProvider {
