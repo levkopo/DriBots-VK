@@ -44,7 +44,7 @@ class VKPlatformProvider implements BasePlatformProvider {
     /**
      * @throws JsonException
      */
-    private function uploadAttachment(int $peerId, ?Attachment $attachment){
+    private function uploadAttachment(int $peerId, ?Attachment $attachment): string {
         $response = "";
         if($attachment instanceof PhotoAttachment){
             $photo = $this->uploadPhoto($peerId, $attachment);
