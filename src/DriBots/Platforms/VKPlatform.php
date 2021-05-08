@@ -84,7 +84,8 @@ class VKPlatform extends BasePlatform {
             $attachment = $attachment['photo'];
 
             return new PhotoAttachment(
-                path: $attachment['sizes'][(int) (count($attachment['sizes'])/2)]['url']
+                path: $attachment['sizes'][(int) (count($attachment['sizes'])/2)]['url'],
+                extension: "jpg"
             );
         }
 
