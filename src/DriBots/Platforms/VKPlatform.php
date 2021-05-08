@@ -82,9 +82,10 @@ class VKPlatform extends BasePlatform {
     #[Pure] public function parseAttachment(array $attachment): ?Attachment{
         if($attachment['type']==="photo"){
             $attachment = $attachment['photo'];
+            $url = $attachment['sizes'][(int) (count($attachment['sizes'])/2)]['url'];
 
             return new PhotoAttachment(
-                path: $attachment['sizes'][(int) (count($attachment['sizes'])/2)]['url']
+                path: explode("?", $url)[0]
             );
         }
 
