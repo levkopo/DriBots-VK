@@ -25,7 +25,8 @@
 
   "require": {
     "php": ">=8.0",
-    "levkopo/dribots": "^1.0",
-    "ext-json": "*"
+    "levkopo/dribots": "^1.0.3",
+    "ext-json": "*",
+    "ext-curl": "*"
   }
 }
