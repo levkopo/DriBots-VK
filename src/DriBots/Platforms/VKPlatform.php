@@ -75,7 +75,7 @@ class VKPlatform extends BasePlatform {
             fromId: $data['peer_id'],
             text: $data['text'],
             attachment: count($data['attachments'])!==0?
-                $this->parseAttachment($data['attachments'][1]):null
+                $this->parseAttachment($data['attachments'][0]):null
         );
     }
 
