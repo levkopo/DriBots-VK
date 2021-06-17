@@ -24,7 +24,8 @@ class VKPlatformProvider implements BasePlatformProvider {
             attachments: [$this->uploadAttachment($toId, $attachment)])){
             return new Message(
                 id: $messageId,
-                fromId: $this->platform->groupId,
+                fromId: $toId,
+                ownerId: $this->platform->groupId,
                 text: $text,
                 attachment: $attachment,
             );

@@ -65,6 +65,7 @@ class VKPlatform extends BasePlatform {
         return new Message(
             id: $data['conversation_message_id'],
             fromId: $data['peer_id'],
+            ownerId: $data['from_id'],
             text: $data['text'],
             attachment: count($data['attachments'])!==0?
                 $this->parseAttachment($data['attachments'][0]):null,
