@@ -74,7 +74,7 @@ class VKPlatformProvider implements BasePlatformProvider {
 
     public function getUser(int $chatId, int $userId): User|false {
         if($userData = $this->api->getUser($userId, ["domain"])){
-            $user = $userData[0];
+            $user = $userData;
 
             return new User(
                 id: $user['id'],
