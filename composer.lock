@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed8e75d906f559f52935be9ccad101ec",
+    "content-hash": "a623fca9051eb5b0f7b23bacbfcabcd7",
     "packages": [
         {
             "name": "levkopo/dribots",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/levkopo/DriBots.git",
-                "reference": "1ea78dae0d7ad30d5ae79816152868eb67f4e517"
+                "reference": "544b7637c9134bde9c64cb9b13f56ed1b76e79e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/levkopo/DriBots/zipball/1ea78dae0d7ad30d5ae79816152868eb67f4e517",
-                "reference": "1ea78dae0d7ad30d5ae79816152868eb67f4e517",
+                "url": "https://api.github.com/repos/levkopo/DriBots/zipball/544b7637c9134bde9c64cb9b13f56ed1b76e79e7",
+                "reference": "544b7637c9134bde9c64cb9b13f56ed1b76e79e7",
                 "shasum": ""
             },
             "require": {
@@ -54,9 +54,9 @@
             "homepage": "https://github.com/levkopo/DriBots",
             "support": {
                 "issues": "https://github.com/levkopo/DriBots/issues",
-                "source": "https://github.com/levkopo/DriBots/tree/1.0.5"
+                "source": "https://github.com/levkopo/DriBots/tree/1.0.6"
             },
-            "time": "2021-06-17T09:41:23+00:00"
+            "time": "2021-06-17T10:39:24+00:00"
         },
         {
             "name": "levkopo/vk-api",

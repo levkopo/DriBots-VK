@@ -7,24 +7,27 @@ namespace DriBots\Platforms;
 use CURLFile;
 use DriBots\Data\Attachment;
 use DriBots\Data\Attachments\PhotoAttachment;
+use DriBots\Data\InlineQuery;
+use DriBots\Data\InlineQueryResult;
 use DriBots\Data\Message;
 use DriBots\Data\User;
 use levkopo\VKApi\VKApi;
 
 class VKPlatformProvider implements BasePlatformProvider {
+
     public VKApi $api;
 
     public function __construct(public VKPlatform $platform) {
         $this->api = VKApi::group($this->platform->accessToken, $this->platform->apiVersion);
     }
 
-    public function sendMessage(int $toId, string $text, Attachment $attachment = null): Message|false {
-        if($messageId = $this->api->sendMessage(peerId: $toId,
+    public function sendMessage(int $chatId, string $text, Attachment $attachment = null): Message|false {
+        if($messageId = $this->api->sendMessage(peerId: $chatId,
             message: $text,
-            attachments: [$this->uploadAttachment($toId, $attachment)])){
+            attachments: [$this->uploadAttachment($chatId, $attachment)])){
             return new Message(
                 id: $messageId,
-                fromId: $toId,
+                chatId: $chatId,
                 ownerId: $this->platform->groupId,
                 text: $text,
                 attachment: $attachment,
@@ -69,7 +72,7 @@ class VKPlatformProvider implements BasePlatformProvider {
         return json_decode($json, true, flags: JSON_THROW_ON_ERROR);
     }
 
-    public function getUser(int $userId): User|false {
+    public function getUser(int $chatId, int $userId): User|false {
         if($userData = $this->api->getUser($userId, ["domain"])){
             $user = $userData[0];
 
@@ -80,5 +83,16 @@ class VKPlatformProvider implements BasePlatformProvider {
         }
 
         return false;
+    }
+
+    public function answerToQuery(InlineQuery $query, InlineQueryResult $inlineQueryResult): bool {
+        if(!($query instanceof VKInlineQuery))
+            return false;
+
+        if(!$this->api->editMessage($query->chatId, $query->id, $inlineQueryResult->messageText)||
+                $this->api->sendMessage($query->chatId, $inlineQueryResult->messageText))
+            return false;
+
+        return true;
     }
 }

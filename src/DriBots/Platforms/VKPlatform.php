@@ -64,13 +64,13 @@ class VKPlatform extends BasePlatform {
     public function parseMessage(array $data): Message {
         return new Message(
             id: $data['conversation_message_id'],
-            fromId: $data['peer_id'],
+            chatId: $data['peer_id'],
             ownerId: $data['from_id'],
             text: $data['text'],
             attachment: count($data['attachments'])!==0?
                 $this->parseAttachment($data['attachments'][0]):null,
             user: $data['from_id']>0?
-                $this->platformProvider->getUser($data['from_id']):null
+                $this->platformProvider->getUser(0, $data['from_id']):null
         );
     }
 
