@@ -7,6 +7,7 @@ namespace DriBots\Platforms;
 use DriBots\Data\Attachment;
 use DriBots\Data\Attachments\PhotoAttachment;
 use DriBots\Data\Event;
+use DriBots\Data\InlineQuery;
 use DriBots\Data\Message;
 use JetBrains\PhpStorm\Pure;
 
@@ -14,6 +15,7 @@ class VKPlatform extends BasePlatform {
 
     private array $data;
     private VKPlatformProvider $platformProvider;
+    private array $groupData;
 
     public function __construct(
         public string $accessToken,
@@ -23,6 +25,7 @@ class VKPlatform extends BasePlatform {
         public string $apiVersion = "5.104",
     ) {
         $this->platformProvider = new VKPlatformProvider($this);
+        $this->groupData = $this->platformProvider->api->getGroup($this->groupId);
     }
 
     public function getName(): string {
@@ -55,10 +58,19 @@ class VKPlatform extends BasePlatform {
     }
 
     public function getEvent(): Event|false {
-        return match($this->data['type']) {
-            "message_new" => Event::NEW_MESSAGE($this->parseMessage($this->data['object']['message'])),
-            default => false
-        };
+        switch ($this->data['type']) {
+            case "message_new":
+                $message = $this->parseMessage($this->data['object']['message']);
+                if(str_starts_with($message->text, "@{$this->groupData['screen_name']}")){
+                    return Event::INLINE_QUERY(new VKInlineQuery((string) $message->id,
+                        $message->chatId, $message->user, substr($message->text,
+                            count($this->groupData['screen_name'])+1)));
+                }
+
+                return Event::NEW_MESSAGE($message);
+        }
+
+        return false;
     }
 
     public function parseMessage(array $data): Message {
