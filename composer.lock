@@ -60,16 +60,16 @@
         },
         {
             "name": "levkopo/vk-api",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/levkopo/VK-Api.git",
-                "reference": "59423bf6e5e8ca418eaf427d9279e9d7849e4846"
+                "reference": "a2e5270ac3c654e132cdeae431aec98990b09c39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/levkopo/VK-Api/zipball/59423bf6e5e8ca418eaf427d9279e9d7849e4846",
-                "reference": "59423bf6e5e8ca418eaf427d9279e9d7849e4846",
+                "url": "https://api.github.com/repos/levkopo/VK-Api/zipball/a2e5270ac3c654e132cdeae431aec98990b09c39",
+                "reference": "a2e5270ac3c654e132cdeae431aec98990b09c39",
                 "shasum": ""
             },
             "require": {
@@ -95,9 +95,9 @@
             "description": "Library for vk api",
             "support": {
                 "issues": "https://github.com/levkopo/VK-Api/issues",
-                "source": "https://github.com/levkopo/VK-Api/tree/1.0"
+                "source": "https://github.com/levkopo/VK-Api/tree/1.0.1"
             },
-            "time": "2021-06-15T15:36:12+00:00"
+            "time": "2021-06-17T12:52:04+00:00"
         },
         {
             "name": "monolog/monolog",

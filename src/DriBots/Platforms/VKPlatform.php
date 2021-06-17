@@ -7,7 +7,6 @@ namespace DriBots\Platforms;
 use DriBots\Data\Attachment;
 use DriBots\Data\Attachments\PhotoAttachment;
 use DriBots\Data\Event;
-use DriBots\Data\InlineQuery;
 use DriBots\Data\Message;
 use JetBrains\PhpStorm\Pure;
 
