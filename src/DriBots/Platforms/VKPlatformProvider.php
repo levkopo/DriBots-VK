@@ -3,8 +3,8 @@
 
 namespace DriBots\Platforms;
 
-
 use CURLFile;
+use DriBots\Attachments\PhotoAttachmentImpl;
 use DriBots\Data\Attachment;
 use DriBots\Data\Attachments\PhotoAttachment;
 use DriBots\Data\InlineQuery;
@@ -52,7 +52,7 @@ class VKPlatformProvider implements BasePlatformProvider {
             "peer_id"=>$peer_id
         ]);
 
-        $upload_response = $this->upload($response['upload_url'], $file->path);
+        $upload_response = $this->upload($response['upload_url'], $file->getPath());
         return $this->api->request('photos.saveMessagesPhoto', [
             'photo' => $upload_response['photo'],
             'server' => $upload_response['server'],
@@ -69,7 +69,7 @@ class VKPlatformProvider implements BasePlatformProvider {
         $json = curl_exec($curl);
         curl_close($curl);
 
-        return json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+        return json_decode($json, true);
     }
 
     public function getUser(int $chatId, int $userId): User|false {
@@ -94,5 +94,13 @@ class VKPlatformProvider implements BasePlatformProvider {
             return false;
 
         return true;
+    }
+
+    public function getAttachmentFromFileId(string $fileId): Attachment|false {
+        if(str_starts_with($fileId, "photo")){
+            return new PhotoAttachmentImpl(substr($fileId, 5), "jpg");
+        }
+
+        return false;
     }
 }

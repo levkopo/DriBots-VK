@@ -25,7 +25,7 @@
 
   "require": {
     "php": ">=8.0",
-    "levkopo/dribots": "^1.1",
+    "levkopo/dribots": "^1.2",
     "ext-json": "*",
     "ext-curl": "*",
     "levkopo/vk-api": "^1.0"

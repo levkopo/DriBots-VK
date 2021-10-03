@@ -4,6 +4,7 @@
 namespace DriBots\Platforms;
 
 
+use DriBots\Attachments\VKPhotoAttachment;
 use DriBots\Data\Attachment;
 use DriBots\Data\Attachments\PhotoAttachment;
 use DriBots\Data\Event;
@@ -49,8 +50,7 @@ class VKPlatform extends BasePlatform {
     }
 
     public function requestIsAccept(): bool {
-        $this->data = json_decode(file_get_contents("php://input"),
-            true, flags: JSON_THROW_ON_ERROR);
+        $this->data = json_decode(file_get_contents("php://input"), true);
         return isset($this->data['type'], $this->data['group_id'])&&
             (!($this->secretCode!==null)||(isset($this->data["secret"])&&
                     $this->data["secret"]===$this->secretCode));
@@ -85,14 +85,11 @@ class VKPlatform extends BasePlatform {
         );
     }
 
-    #[Pure] public function parseAttachment(array $attachment): ?Attachment{
+    public function parseAttachment(array $attachment): ?Attachment{
         if($attachment['type']==="photo"){
             $attachment = $attachment['photo'];
 
-            return new PhotoAttachment(
-                path: $attachment['sizes'][(int) (count($attachment['sizes'])/2)]['url'],
-                extension: "jpg"
-            );
+            return new VKPhotoAttachment($attachment);
         }
 
         return null;
