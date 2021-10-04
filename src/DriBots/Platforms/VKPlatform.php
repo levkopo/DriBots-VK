@@ -25,7 +25,7 @@ class VKPlatform extends BasePlatform {
         public string $apiVersion = "5.104",
     ) {
         $this->platformProvider = new VKPlatformProvider($this);
-        $this->groupData = $this->platformProvider->api->getGroup($this->groupId);
+//        $this->groupData = $this->platformProvider->api->getGroup($this->groupId);
     }
 
     public function getName(): string {
@@ -60,11 +60,11 @@ class VKPlatform extends BasePlatform {
         switch ($this->data['type']) {
             case "message_new":
                 $message = $this->parseMessage($this->data['object']['message']);
-                if(str_starts_with($message->text, "@{$this->groupData['screen_name']}")){
-                    return Event::INLINE_QUERY(new VKInlineQuery((string) $message->id,
-                        $message->chatId, $message->user, substr($message->text,
-                            count($this->groupData['screen_name'])+1)));
-                }
+//                if(str_starts_with($message->text, "@{$this->groupData['screen_name']}")){
+//                    return Event::INLINE_QUERY(new VKInlineQuery((string) $message->id,
+//                        $message->chatId, $message->user, substr($message->text,
+//                            count($this->groupData['screen_name'])+1)));
+//                }
 
                 return Event::NEW_MESSAGE($message);
         }
